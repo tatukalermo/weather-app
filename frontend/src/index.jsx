@@ -20,6 +20,7 @@ class Weather extends React.Component {
 
     this.state = {
       icon: '',
+      temp: '',
       timeStamp: '',
       location: 'Helsinki',
       error: '',
@@ -37,6 +38,7 @@ class Weather extends React.Component {
       this.setState(
         {
           icon: weatherData.weather[0].icon.slice(0, -1),
+          temp: weatherData.main.temp,
           updatedAt: new Date().toISOString(),
           error: '',
         });
@@ -46,14 +48,15 @@ class Weather extends React.Component {
   }
 
   render() {
-    const { icon, location, updatedAt } = this.state;
+    const { icon, temp, location, updatedAt } = this.state;
 
     return (
       <div>
         <div className="icon">
-        <h2>Curent weather in {location}</h2>
-        {icon && <img width={200} height={200} alt="weather_icon" src={`/img/${icon}.svg`} />}
-        {updatedAt && <p>{updatedAt}</p>}
+          <h2>Current weather in {location}</h2>
+          {icon && <img width={200} height={200} alt="weather_icon" src={`/img/${icon}.svg`} />}
+          {updatedAt && <p>{updatedAt}</p>}
+          {temp && <p>{temp}</p>}
           <button onClick={() => this.getWeather()}>Update</button>
         </div>
       </div>
