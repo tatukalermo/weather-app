@@ -128,6 +128,6 @@ class Forecast extends React.Component {
 
 ReactDOM.render(
   <Weather />,
-  <Forecast />,
+  //<Forecast />,
   document.getElementById('app')
 );
