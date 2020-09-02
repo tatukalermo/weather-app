@@ -103,31 +103,22 @@ class Forecast extends React.Component {
       console.log('Forecast data:', forecastData)
       this.setState(
         {
-          icon: weatherData.weather[0].icon,
-          temp: weatherData.main.temp,
-          humidity: weatherData.main.humidity,
-          pressure: weatherData.main.pressure,
-          updatedAt: new Date().toISOString(),
+          icon: '',
+          temp: '',
           error: '',
         });
     } else {
-      this.setState({ error: 'Unbable to fetch weather' });
+      this.setState({ error: 'Unbable to fetch forecast' });
     }
   }
 
   render() {
-    const { icon, temp, location, updatedAt } = this.state;
+    const { icon, temp, location } = this.state;
 
     return (
       <div>
-        <div className="icon">
-          <h2>Current weather in {location}</h2>
-          {icon && <img width={100} height={100} alt="weather_icon" src={`http://openweathermap.org/img/wn/${icon}@2x.png`} />}
-          {updatedAt && <p>{updatedAt}</p>}
-          {temp && <p>Temperature: {temp}ºC</p>}
-          {humidity && <p>Humidity: {humidity}</p>}
-          {pressure && <p>Air pressure: {pressure}</p>}
-          <button onClick={() => this.getWeather()}>Update</button>
+        <div className="fore">
+          <h2>Forecast</h2>
         </div>
       </div>
     );
@@ -137,5 +128,6 @@ class Forecast extends React.Component {
 
 ReactDOM.render(
   <Weather />,
+  <Forecast />,
   document.getElementById('app')
 );
