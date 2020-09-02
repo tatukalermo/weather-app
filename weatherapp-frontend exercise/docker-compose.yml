@@ -1,0 +1,30 @@
+version: '3.4'
+services:
+    backend:
+        image: weatherapp_backend:latest
+        container_name: backend
+        build:
+            dockerfile: Dockerfile.backend
+            context: ./backend
+        environment:
+            APPID: "4683c985b5b3595e40e7eb5b7a1d9878"
+            MAP_ENDPOINT: "http://api.openweathermap.org/data/2.5"
+            TARGET_CITY: "Helsinki,fi"
+        ports:
+            - "9000:9000"
+        volumes:
+        - ./backend/src:/usr/src/app/src
+
+    frontend:
+        image: weatherapp_frontend:latest
+        container_name: frontend
+        build:
+            dockerfile: Dockerfile.frontend
+            context: ./frontend
+        ports:
+            - "8000:8000"
+        volumes:
+        - ./frontend/src:/usr/src/app/src
+        depends_on:
+            - backend
+
