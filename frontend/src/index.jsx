@@ -2,7 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Forecast } from './components/Forecast';
 
+// ENVIRONMENT VARIABLES
+
 const baseURL = process.env.ENDPOINT || 'http://localhost:9000/api';
+
+// FUNCTIONS
 
 const getWeatherFromApi = async (city) => {
   try {
@@ -14,6 +18,8 @@ const getWeatherFromApi = async (city) => {
 
   return {};
 };
+
+// CLASSES
 
 class Weather extends React.Component {
   constructor(props) {
@@ -33,6 +39,8 @@ class Weather extends React.Component {
   async componentWillMount() {
     this.getWeather();
   }
+
+  // Collects the weather data from API and puts it to an Array. Then sets the state to match the data.
 
   async getWeather() {
     const [weatherData] = await Promise.all([getWeatherFromApi(this.state.location)]);
