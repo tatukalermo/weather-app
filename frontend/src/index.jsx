@@ -1,22 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Forecast } from './components/Forecast';
 
 const baseURL = process.env.ENDPOINT || 'http://localhost:9000/api';
 
 const getWeatherFromApi = async (city) => {
   try {
     const response = await fetch(`${baseURL}/weatherbycity?city=${city}`);
-    return response.json();
-  } catch (error) {
-    console.error(error);
-  }
-
-  return {};
-};
-
-const getForecastFromApi = async (city) => {
-  try {
-    const response = await fetch(`${baseURL}/forecast?q=${city}`);
     return response.json();
   } catch (error) {
     console.error(error);
@@ -58,7 +48,7 @@ class Weather extends React.Component {
           error: '',
         });
     } else {
-      this.setState({ error: 'Unbable to fetch weather' });
+      this.setState({ error: 'Unable to fetch weather' });
     }
   }
 
@@ -67,7 +57,7 @@ class Weather extends React.Component {
 
     return (
       <div>
-        <div className="icon">
+        <div className="weather">
           <h2>Current weather in {location}</h2>
           {icon && <img width={100} height={100} alt="weather_icon" src={`http://openweathermap.org/img/wn/${icon}@2x.png`} />}
           {updatedAt && <p>{updatedAt}</p>}
@@ -81,53 +71,10 @@ class Weather extends React.Component {
   }
 }
 
-class Forecast extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      icon: '',
-      temp: '',
-      location: 'Helsinki',
-      error: '',
-    };
-  }
-
-  async componentWillMount() {
-    this.getForecast();
-  }
-
-  async getForecast() {
-    const [forecastData] = await Promise.all([getForecastFromApi(this.state.location)]);
-    if (forecastData) {
-      console.log('Forecast data:', forecastData)
-      this.setState(
-        {
-          icon: '',
-          temp: '',
-          error: '',
-        });
-    } else {
-      this.setState({ error: 'Unbable to fetch forecast' });
-    }
-  }
-
-  render() {
-    const { icon, temp, location } = this.state;
-
-    return (
-      <div>
-        <div className="fore">
-          <h2>Forecast</h2>
-        </div>
-      </div>
-    );
-  }
-}
-
-
 ReactDOM.render(
-  <Weather />,
-  //<Forecast />,
+  <div>
+    <Weather />
+    <Forecast />
+  </div>,
   document.getElementById('app')
 );

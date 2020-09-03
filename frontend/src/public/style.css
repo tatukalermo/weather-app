@@ -8,7 +8,7 @@ body{
   align-items: center;
 }
 
-.icon {
+.weather, .forecast {
   width: 30vw;
   height: 30vw;
   padding-top: 20px;
