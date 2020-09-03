@@ -32,11 +32,64 @@ class Weather extends React.Component {
       pressure: '',
       timeStamp: '',
       location: 'Helsinki',
+      latitude: '60.1698626',
+      longitude: '24.938378699999998',
       error: '',
     };
   }
 
-  async componentWillMount() {
+
+
+  async componentDidMount() {
+
+    //Asking for permission to get the location from the user if browser supports Geolocation.
+    //When allowed saves latitude and longitude to the class for API call later.
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function (position) {
+          console.log("latitude:" + position.coords.latitude + " longitude:" + position.coords.longitude);
+          this.setState(
+            {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            });
+        },
+        function (error) {
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              this.setState(
+                {
+                  error: 'User denied the request for Geolocation.',
+                });
+              break;
+            case error.POSITION_UNAVAILABLE:
+              this.setState(
+                {
+                  error: 'Location information is unavailable.',
+                });
+              break;
+            case error.TIMEOUT:
+              this.setState(
+                {
+                  error: 'The request to get user location timed out.',
+                });
+              break;
+            case error.UNKNOWN_ERROR:
+              this.setState(
+                {
+                  error: 'An unknown error occurred.',
+                });
+              break;
+          }
+        }
+      );
+    } else {
+      this.setState(
+        {
+          error: 'Geolocation is not supported by this browser.',
+        });
+    }
     this.getWeather();
   }
 
@@ -52,7 +105,7 @@ class Weather extends React.Component {
           temp: weatherData.main.temp,
           humidity: weatherData.main.humidity,
           pressure: weatherData.main.pressure,
-          updatedAt: new Date().toISOString(),
+          updatedAt: new Date().toTimeString(),
           error: '',
         });
     } else {
@@ -61,7 +114,7 @@ class Weather extends React.Component {
   }
 
   render() {
-    const { icon, temp, humidity, pressure, location, updatedAt } = this.state;
+    const { icon, temp, humidity, pressure, location, updatedAt, error } = this.state;
 
     return (
       <div>
@@ -73,6 +126,7 @@ class Weather extends React.Component {
           {humidity && <p>Humidity: {humidity}</p>}
           {pressure && <p>Air pressure: {pressure}</p>}
           <button onClick={() => this.getWeather()}>Update</button>
+          {error && <p>{error}</p>}
         </div>
       </div>
     );
