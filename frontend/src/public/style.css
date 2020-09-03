@@ -1,15 +1,16 @@
 body{
-  overflow: hidden;
-  position: absolute;
-  width: 100%;
-  height: 100%;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 1.3em;
+  color: #fff;
+  text-shadow: .1em .1em 0 rgba(0,0,0,0.3);
+  height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(to right top, #99bbcb, #a5c7d7, #b1d4e2, #bde0ee, #c9edfa);
 }
 
 .weather, .forecast {
-  width: 30vw;
-  height: 30vw;
   padding-top: 20px;
 }

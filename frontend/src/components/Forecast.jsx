@@ -6,7 +6,7 @@ const baseURL = process.env.ENDPOINT || 'http://localhost:9000/api';
 
 const getForecastFromApi = async (city) => {
   try {
-    const response = await fetch(`${baseURL}/forecast?q=${city}`);
+    const response = await fetch(`${baseURL}/forecast?q=${city}&count=10`);
     return response.json();
   } catch (error) {
     console.error(error);
