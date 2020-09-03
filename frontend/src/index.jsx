@@ -32,30 +32,32 @@ class Weather extends React.Component {
       pressure: '',
       timeStamp: '',
       location: 'Helsinki',
-      latitude: '60.1698626',
-      longitude: '24.938378699999998',
+      latitude: null,
+      longitude: null,
       error: '',
     };
   }
 
 
 
-  async componentDidMount() {
+  componentDidMount() {
 
     //Asking for permission to get the location from the user if browser supports Geolocation.
     //When allowed saves latitude and longitude to the class for API call later.
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        function (position) {
+        (position) => {
           console.log("latitude:" + position.coords.latitude + " longitude:" + position.coords.longitude);
+          let newLatitude = position.coords.latitude;
+          let newLongitude = position.coords.longitude;
           this.setState(
             {
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
+              latitude: newLatitude,
+              longitude: newLongitude
             });
         },
-        function (error) {
+        (error) => {
           switch (error.code) {
             case error.PERMISSION_DENIED:
               this.setState(
