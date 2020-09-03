@@ -38,23 +38,24 @@ class Weather extends React.Component {
     };
   }
 
-
-
   componentDidMount() {
+    this.getLocation();
+    this.getWeather();
+  }
 
-    //Asking for permission to get the location from the user if browser supports Geolocation.
-    //When allowed saves latitude and longitude to the class for API call later.
+  //Asking for permission to get the location from the user if browser supports Geolocation.
+  //When allowed saves latitude and longitude to the class for API call later.
+
+  async getLocation() {
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           console.log("latitude:" + position.coords.latitude + " longitude:" + position.coords.longitude);
-          let newLatitude = position.coords.latitude;
-          let newLongitude = position.coords.longitude;
           this.setState(
             {
-              latitude: newLatitude,
-              longitude: newLongitude
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude
             });
         },
         (error) => {
@@ -92,7 +93,6 @@ class Weather extends React.Component {
           error: 'Geolocation is not supported by this browser.',
         });
     }
-    this.getWeather();
   }
 
   // Collects the weather data from API and puts it to an Array. Then sets the state to match the data.

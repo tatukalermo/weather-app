@@ -24,12 +24,12 @@ export class Forecast extends React.Component {
     this.state = {
       icon: '',
       temp: '',
-      location: 'London',
+      location: 'Helsinki',
       error: '',
     };
   }
 
-  async componentWillMount() {
+  componentDidMount() {
     this.getForecast();
   }
 
