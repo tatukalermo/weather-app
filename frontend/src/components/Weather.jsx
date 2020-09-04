@@ -102,7 +102,7 @@ export class Weather extends React.Component {
       this.setState(
         {
           icon: weatherData.weather[0].icon,
-          temp: weatherData.main.temp,
+          temp: Math.round(weatherData.main.temp),
           humidity: weatherData.main.humidity,
           pressure: weatherData.main.pressure,
           updatedAt: new Date().toTimeString(),
@@ -120,11 +120,11 @@ export class Weather extends React.Component {
       <div>
         <div className="weather">
           <h2>Current weather in {location}</h2>
-          {icon && <img width={100} height={100} alt="weather_icon" src={`http://openweathermap.org/img/wn/${icon}@2x.png`} />}
+          {icon && <img width={100} height={100} alt="weather_icon" src={`https://openweathermap.org/img/wn/${icon}@2x.png`} />}
           {updatedAt && <p>{updatedAt}</p>}
-          {temp && <p>Temperature: {temp}ºC</p>}
-          {humidity && <p>Humidity: {humidity}</p>}
-          {pressure && <p>Air pressure: {pressure}</p>}
+          {temp && <p>Temperature: {temp} ºC</p>}
+          {humidity && <p>Humidity: {humidity} %</p>}
+          {pressure && <p>Air pressure: {pressure} hPa</p>}
           <button onClick={() => this.getWeather()}>Update</button>
           {error && <p>{error}</p>}
         </div>

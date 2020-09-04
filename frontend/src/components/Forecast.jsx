@@ -35,6 +35,58 @@ export class Forecast extends React.Component {
     this.getForecast();
   }
 
+  //Asking for permission to get the location from the user if browser supports Geolocation.
+  //When allowed saves latitude and longitude to the class for API call later.
+
+  async getLocation() {
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          console.log("latitude:" + position.coords.latitude + " longitude:" + position.coords.longitude);
+          this.setState(
+            {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude
+            });
+        },
+        (error) => {
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              this.setState(
+                {
+                  error: 'User denied the request for Geolocation.',
+                });
+              break;
+            case error.POSITION_UNAVAILABLE:
+              this.setState(
+                {
+                  error: 'Location information is unavailable.',
+                });
+              break;
+            case error.TIMEOUT:
+              this.setState(
+                {
+                  error: 'The request to get user location timed out.',
+                });
+              break;
+            case error.UNKNOWN_ERROR:
+              this.setState(
+                {
+                  error: 'An unknown error occurred.',
+                });
+              break;
+          }
+        }
+      );
+    } else {
+      this.setState(
+        {
+          error: 'Geolocation is not supported by this browser.',
+        });
+    }
+  }
+
   //Gets the forecast data from the API and puts it in an Array.
 
   async getForecast() {
