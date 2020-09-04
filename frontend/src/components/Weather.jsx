@@ -6,9 +6,9 @@ const baseURL = process.env.ENDPOINT || 'http://localhost:9000/api';
 
 // FUNCTIONS
 
-const getWeatherFromApi = async (city) => {
+const getWeatherFromApi = async (lat, lon) => {
   try {
-    const response = await fetch(`${baseURL}/weatherbycity?city=${city}`);
+    const response = await fetch(`${baseURL}/weatherbycoordinates?lat=${lat}&lon=${lon}`);
     return response.json();
   } catch (error) {
     console.error(error);
@@ -36,17 +36,19 @@ export class Weather extends React.Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.getLocation();
-    this.getWeather();
+    setTimeout(10000000);
+    await this.getWeather();
   }
 
   //Asking for permission to get the location from the user if browser supports Geolocation.
   //When allowed saves latitude and longitude to the class for API call later.
 
-  async getLocation() {
-
+  getLocation() {
+    console.log("Location running");
     if (navigator.geolocation) {
+      console.log("Geolocation");
       navigator.geolocation.getCurrentPosition(
         (position) => {
           console.log("latitude:" + position.coords.latitude + " longitude:" + position.coords.longitude);
@@ -55,6 +57,8 @@ export class Weather extends React.Component {
               latitude: position.coords.latitude,
               longitude: position.coords.longitude
             });
+          console.log(this.state.longitude);
+          console.log(this.state.latitude);
         },
         (error) => {
           switch (error.code) {
@@ -83,7 +87,8 @@ export class Weather extends React.Component {
                 });
               break;
           }
-        }
+        },
+        //{ maximumAge: 0, timeout: 5000, enableHighAccuracy: true }
       );
     } else {
       this.setState(
@@ -91,12 +96,16 @@ export class Weather extends React.Component {
           error: 'Geolocation is not supported by this browser.',
         });
     }
+    console.log("end of Location");
   }
 
   // Collects the weather data from API and puts it to an Array. Then sets the state to match the data.
 
   async getWeather() {
-    const [weatherData] = await Promise.all([getWeatherFromApi(this.state.location)]);
+    console.log("Weather running");
+    console.log(this.state.longitude);
+    console.log(this.state.latitude);
+    const [weatherData] = await Promise.all([getWeatherFromApi(this.state.latitude, this.state.longitude)]);
     if (weatherData) {
       console.log('Weather data:', weatherData)
       this.setState(
@@ -111,6 +120,7 @@ export class Weather extends React.Component {
     } else {
       this.setState({ error: 'Unable to fetch weather' });
     }
+    console.log("Weather ending");
   }
 
   render() {
