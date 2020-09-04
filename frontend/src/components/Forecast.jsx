@@ -1,5 +1,7 @@
 import React from 'react';
 
+// ENVIRONMENT VARIABLES
+
 const baseURL = process.env.ENDPOINT || 'http://localhost:9000/api';
 
 // FUNCTIONS
