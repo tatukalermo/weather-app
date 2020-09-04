@@ -36,67 +36,59 @@ export class Weather extends React.Component {
     };
   }
 
-  async componentDidMount() {
-    this.getLocation();
-    setTimeout(10000000);
-    await this.getWeather();
-  }
-
   //Asking for permission to get the location from the user if browser supports Geolocation.
   //When allowed saves latitude and longitude to the class for API call later.
 
-  getLocation() {
-    console.log("Location running");
-    if (navigator.geolocation) {
-      console.log("Geolocation");
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          console.log("latitude:" + position.coords.latitude + " longitude:" + position.coords.longitude);
+  async componentDidMount() {
+    const success = position => {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      console.log(latitude, longitude);
+      this.setState({
+        latitude: latitude,
+        longitude: longitude
+      });
+      this.getWeather();
+    };
+
+    const error = error => {
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
           this.setState(
             {
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude
+              error: 'User denied the request for Geolocation.',
             });
-          console.log(this.state.longitude);
-          console.log(this.state.latitude);
-        },
-        (error) => {
-          switch (error.code) {
-            case error.PERMISSION_DENIED:
-              this.setState(
-                {
-                  error: 'User denied the request for Geolocation.',
-                });
-              break;
-            case error.POSITION_UNAVAILABLE:
-              this.setState(
-                {
-                  error: 'Location information is unavailable.',
-                });
-              break;
-            case error.TIMEOUT:
-              this.setState(
-                {
-                  error: 'The request to get user location timed out.',
-                });
-              break;
-            case error.UNKNOWN_ERROR:
-              this.setState(
-                {
-                  error: 'An unknown error occurred.',
-                });
-              break;
-          }
-        },
-        //{ maximumAge: 0, timeout: 5000, enableHighAccuracy: true }
-      );
+          break;
+        case error.POSITION_UNAVAILABLE:
+          this.setState(
+            {
+              error: 'Location information is unavailable.',
+            });
+          break;
+        case error.TIMEOUT:
+          this.setState(
+            {
+              error: 'The request to get user location timed out.',
+            });
+          break;
+        case error.UNKNOWN_ERROR:
+          this.setState(
+            {
+              error: 'An unknown error occurred.',
+            });
+          break;
+      }
+    };
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(success, error, { maximumAge: 0, timeout: 5000, enableHighAccuracy: true });
     } else {
       this.setState(
         {
           error: 'Geolocation is not supported by this browser.',
         });
     }
-    console.log("end of Location");
+    console.log(this.state.longitude);
+    console.log(this.state.latitude);
   }
 
   // Collects the weather data from API and puts it to an Array. Then sets the state to match the data.
