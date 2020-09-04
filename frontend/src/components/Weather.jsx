@@ -19,7 +19,7 @@ const getWeatherFromApi = async (city) => {
 
 // CLASSES
 
-class Weather extends React.Component {
+export class Weather extends React.Component {
   constructor(props) {
     super(props);
 
