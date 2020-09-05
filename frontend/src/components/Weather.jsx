@@ -37,7 +37,7 @@ export class Weather extends React.Component {
   }
 
   //Asking for permission to get the location from the user if browser supports Geolocation.
-  //When allowed saves latitude and longitude to the class for API call later.
+  //When allowed saves latitude and longitude to the class for API call in getWeather().
 
   async componentDidMount() {
     const success = position => {
