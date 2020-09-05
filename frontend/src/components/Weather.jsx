@@ -30,8 +30,8 @@ export class Weather extends React.Component {
       pressure: '',
       timeStamp: '',
       location: 'Helsinki',
-      latitude: null,
-      longitude: null,
+      latitude: 60.229506099999995,
+      longitude: 24.787014499999998,
       error: '',
     };
   }
@@ -58,6 +58,7 @@ export class Weather extends React.Component {
             {
               error: 'User denied the request for Geolocation.',
             });
+          this.getWeather();
           break;
         case error.POSITION_UNAVAILABLE:
           this.setState(
@@ -107,6 +108,7 @@ export class Weather extends React.Component {
           humidity: weatherData.main.humidity,
           pressure: weatherData.main.pressure,
           updatedAt: new Date().toTimeString(),
+          location: weatherData.name,
           error: '',
         });
     } else {
@@ -121,14 +123,51 @@ export class Weather extends React.Component {
     return (
       <div>
         <div className="weather">
-          <h2>Current weather in {location}</h2>
-          {icon && <img width={100} height={100} alt="weather_icon" src={`https://openweathermap.org/img/wn/${icon}@2x.png`} />}
-          {updatedAt && <p>{updatedAt}</p>}
-          {temp && <p>Temperature: {temp} ºC</p>}
-          {humidity && <p>Humidity: {humidity} %</p>}
-          {pressure && <p>Air pressure: {pressure} hPa</p>}
-          <button onClick={() => this.getWeather()}>Update</button>
-          {error && <p>{error}</p>}
+          <div className="refresh">
+            <img className="icon" src="https://image.flaticon.com/icons/svg/1/1774.svg" onClick={() => this.getWeather()} />
+          </div>
+          <div className="topRow">
+            <div className="topIcon">
+              <img className="icon" src="https://image.flaticon.com/icons/svg/1216/1216895.svg" />
+            </div>
+            <div className="topLocation">
+              <h2>Current weather in {location}</h2>
+            </div>
+            <div className="updatedTime">
+              {updatedAt && <p>{updatedAt}</p>}
+            </div>
+          </div>
+          <div className="main">
+            <div className="currentWeather">
+              <div className="currentIcon">
+                {icon && <img width={100} height={100} alt="weather_icon" src={`https://openweathermap.org/img/wn/${icon}@2x.png`} />}
+              </div>
+              <div className="currentTemp">
+                {temp && <p>Temperature: {temp} ºC</p>}
+              </div>
+            </div>
+            <div className="humidity">
+              <div className="humidityIcon">
+                <img className="icon" src="https://image.flaticon.com/icons/svg/3144/3144126.svg" />
+              </div>
+              <div className="humidityInfo">
+                {humidity && <p>Humidity: {humidity} %</p>}
+              </div>
+            </div>
+            <div className="airPressure">
+              <div className="pressureIcon">
+                <img className="icon" src="https://image.flaticon.com/icons/svg/556/556958.svg" />
+              </div>
+              <div className="pressureInfo">
+                {pressure && <p>Air pressure: {pressure} hPa</p>}
+              </div>
+            </div>
+            <div className="error">
+              <div>
+                {error && <p>{error}</p>}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );

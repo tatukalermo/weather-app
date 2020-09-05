@@ -1,16 +1,15 @@
 body{
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Lato', sans-serif;
   font-weight: 400;
   font-size: 1.3em;
   color: #fff;
-  text-shadow: .1em .1em 0 rgba(0,0,0,0.3);
+  /*text-shadow: .1em .1em 0 rgba(0,0,0,0.3);*/
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-image: linear-gradient(to right top, #99bbcb, #a5c7d7, #b1d4e2, #bde0ee, #c9edfa);
+  background-color: #49d0f2;
 }
 
-.weather, .forecast {
-  padding-top: 20px;
+.icon{
+  filter: invert(1);
+  height: 50px;
+  width: 50px;
 }
