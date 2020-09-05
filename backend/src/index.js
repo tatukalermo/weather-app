@@ -69,6 +69,12 @@ router.get('/api/forecastbycoordinates', async ctx => {
         weather: weatherData.list[1].weather[0],
         time: weatherData.list[1].dt_txt,
         main: weatherData.list[1].main,
+        weather_2: weatherData.list[2].weather[0],
+        time_2: weatherData.list[2].dt_txt,
+        main_2: weatherData.list[2].main,
+        weather_3: weatherData.list[3].weather[0],
+        time_3: weatherData.list[3].dt_txt,
+        main_3: weatherData.list[3].main,
       }
       : {};
   }

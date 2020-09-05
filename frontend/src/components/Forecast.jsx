@@ -26,6 +26,7 @@ export class Forecast extends React.Component {
     this.state = {
       icon: '',
       temp: '',
+      time: '',
       location: 'Helsinki',
       latitude: null,
       longitude: null,
@@ -95,8 +96,9 @@ export class Forecast extends React.Component {
       console.log('Forecast data:', forecastData)
       this.setState(
         {
-          icon: '',
-          temp: '',
+          icon: forecastData.weather.icon,
+          temp: Math.round(forecastData.main.temp),
+          time: forecastData.time,
           error: '',
         });
     } else {
@@ -105,13 +107,17 @@ export class Forecast extends React.Component {
   }
 
   render() {
-    const { icon, temp, location } = this.state;
+    const { icon, temp, time, error } = this.state;
 
     return (
       <div>
         <div className="forecast">
           <h2>Forecast</h2>
+          {icon && <img width={100} height={100} alt="weather_icon" src={`https://openweathermap.org/img/wn/${icon}@2x.png`} />}
+          {temp && <p>Temperature: {temp} ºC</p>}
+          {time && <p>Time: {time}</p>}
           <button onClick={() => this.getForecast()}>Forecast</button>
+          {error && <p>{error}</p>}
         </div>
       </div>
     );
