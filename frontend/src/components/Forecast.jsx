@@ -19,6 +19,8 @@ const getForecastFromApi = async (lat, lon) => {
 
 // CLASSES
 
+//Default latitude and longitude directing to Helsinki
+
 export class Forecast extends React.Component {
   constructor(props) {
     super(props);
@@ -27,9 +29,15 @@ export class Forecast extends React.Component {
       icon: '',
       temp: '',
       time: '',
+      icon2: '',
+      temp2: '',
+      time2: '',
+      icon3: '',
+      temp3: '',
+      time3: '',
       location: 'Helsinki',
-      latitude: null,
-      longitude: null,
+      latitude: 60.1733244,
+      longitude: 24.9410248,
       error: '',
     };
   }
@@ -88,7 +96,7 @@ export class Forecast extends React.Component {
 
   }
 
-  //Gets the forecast data from the API and puts it in an Array.
+  //Gets the forecast data from the API and puts it in an Array. Then sets the state to match the data.
 
   async getForecast() {
     const [forecastData] = await Promise.all([getForecastFromApi(this.state.latitude, this.state.longitude)]);
@@ -99,6 +107,12 @@ export class Forecast extends React.Component {
           icon: forecastData.weather.icon,
           temp: Math.round(forecastData.main.temp),
           time: forecastData.time,
+          icon2: forecastData.weather_2.icon,
+          temp2: Math.round(forecastData.main_2.temp),
+          time2: forecastData.time_2,
+          icon3: forecastData.weather_3.icon,
+          temp3: Math.round(forecastData.main_3.temp),
+          time3: forecastData.time_3,
           error: '',
         });
     } else {
@@ -107,27 +121,43 @@ export class Forecast extends React.Component {
   }
 
   render() {
-    const { icon, temp, time, error } = this.state;
+    const { icon, temp, time, icon2, temp2, time2, icon3, temp3, time3, error } = this.state;
 
     return (
       <div>
         <div className="forecast">
           <div className="box" id="box1">
-            <div>
+            <div className="temp1">
               {temp && <p>{temp} ºC</p>}
             </div>
-            <div>
+            <div className="foreIcon1">
               {icon && <img width={100} height={100} alt="weather_icon" src={`https://openweathermap.org/img/wn/${icon}@2x.png`} />}
             </div>
-            <div>
+            <div className="time1">
               {time && <p>{time}</p>}
             </div>
           </div>
           <div className="box" id="box2">
-
+            <div className="temp2">
+              {temp2 && <p>{temp2} ºC</p>}
+            </div>
+            <div className="foreIcon2">
+              {icon2 && <img width={100} height={100} alt="weather_icon" src={`https://openweathermap.org/img/wn/${icon2}@2x.png`} />}
+            </div>
+            <div className="time2">
+              {time2 && <p>{time2}</p>}
+            </div>
           </div>
           <div className="box" id="box3">
-
+            <div className="temp3">
+              {temp3 && <p>{temp3} ºC</p>}
+            </div>
+            <div className="foreIcon3">
+              {icon3 && <img width={100} height={100} alt="weather_icon" src={`https://openweathermap.org/img/wn/${icon3}@2x.png`} />}
+            </div>
+            <div className="time3">
+              {time3 && <p>{time3}</p>}
+            </div>
           </div>
           <button onClick={() => this.getForecast()}>Forecast</button>
           {error && <p>{error}</p>}

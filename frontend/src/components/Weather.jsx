@@ -19,6 +19,8 @@ const getWeatherFromApi = async (lat, lon) => {
 
 // CLASSES
 
+//Default latitude and longitude directing to Helsinki
+
 export class Weather extends React.Component {
   constructor(props) {
     super(props);
