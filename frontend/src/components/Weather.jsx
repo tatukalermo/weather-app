@@ -26,6 +26,7 @@ export class Weather extends React.Component {
     super(props);
 
     this.state = {
+      loading: true,
       icon: '',
       temp: '',
       humidity: '',
@@ -137,6 +138,8 @@ export class Weather extends React.Component {
     const [weatherData] = await Promise.all([getWeatherFromApi(this.state.latitude, this.state.longitude)]);
     if (weatherData) {
       console.log('Weather data:', weatherData)
+      const loader = document.querySelector(".loader-container");
+      loader.remove();
       this.setState(
         {
           icon: weatherData.weather[0].icon,
@@ -146,6 +149,7 @@ export class Weather extends React.Component {
           weather: weatherData.weather[0].main.toUpperCase(),
           updatedAt: this.getTime(),
           location: weatherData.name,
+          loading: false,
         });
     } else {
       this.setState({ error: 'Unable to fetch weather' });
@@ -153,8 +157,11 @@ export class Weather extends React.Component {
   }
 
   render() {
-    const { icon, temp, humidity, pressure, location, updatedAt, weather, error } = this.state;
+    const { icon, temp, humidity, pressure, location, updatedAt, weather, error, loading } = this.state;
 
+    if (loading) {
+      return null;
+    }
     return (
       <div>
         <div className="weather">

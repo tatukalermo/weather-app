@@ -26,6 +26,7 @@ export class Forecast extends React.Component {
     super(props);
 
     this.state = {
+      loading: true,
       icon: '',
       temp: '',
       time: '',
@@ -113,6 +114,7 @@ export class Forecast extends React.Component {
           icon3: forecastData.weather_3.icon,
           temp3: Math.round(forecastData.main_3.temp),
           time3: forecastData.time_3.slice(11, 16),
+          loading: false,
         });
     } else {
       this.setState({ error: 'Unable to fetch forecast' });
@@ -120,8 +122,11 @@ export class Forecast extends React.Component {
   }
 
   render() {
-    const { icon, temp, time, icon2, temp2, time2, icon3, temp3, time3, error } = this.state;
+    const { icon, temp, time, icon2, temp2, time2, icon3, temp3, time3, loading } = this.state;
 
+    if (loading) {
+      return null;
+    }
     return (
       <div>
         <div className="forecast">
