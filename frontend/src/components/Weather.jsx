@@ -29,6 +29,7 @@ export class Weather extends React.Component {
       humidity: '',
       pressure: '',
       timeStamp: '',
+      weather: '',
       location: 'Helsinki',
       latitude: 60.1733244,
       longitude: 24.9410248,
@@ -107,6 +108,7 @@ export class Weather extends React.Component {
           temp: Math.round(weatherData.main.temp),
           humidity: weatherData.main.humidity,
           pressure: weatherData.main.pressure,
+          weather: weatherData.weather[0].main.toUpperCase(),
           updatedAt: new Date().toTimeString(),
           location: weatherData.name,
         });
@@ -117,7 +119,7 @@ export class Weather extends React.Component {
   }
 
   render() {
-    const { icon, temp, humidity, pressure, location, updatedAt, error } = this.state;
+    const { icon, temp, humidity, pressure, location, updatedAt, weather, error } = this.state;
 
     return (
       <div>
@@ -130,7 +132,7 @@ export class Weather extends React.Component {
               <img className="icon" src="https://image.flaticon.com/icons/svg/1216/1216895.svg" />
             </div>
             <div className="topLocation">
-              <h2>Current weather in {location}</h2>
+              <h1>{location}</h1>
             </div>
             <div className="updatedTime">
               {updatedAt && <p>{updatedAt}</p>}
@@ -141,8 +143,11 @@ export class Weather extends React.Component {
               <div className="currentIcon">
                 {icon && <img width={100} height={100} alt="weather_icon" src={`https://openweathermap.org/img/wn/${icon}@2x.png`} />}
               </div>
+              <div className="currentWeatherName">
+                {weather && <p>{weather}</p>}
+              </div>
               <div className="currentTemp">
-                {temp && <p>Temperature: {temp} ºC</p>}
+                {temp && <p>{temp} ºC</p>}
               </div>
             </div>
             <div className="humidity">

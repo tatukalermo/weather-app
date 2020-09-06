@@ -112,10 +112,23 @@ export class Forecast extends React.Component {
     return (
       <div>
         <div className="forecast">
-          <h2>Forecast</h2>
-          {icon && <img width={100} height={100} alt="weather_icon" src={`https://openweathermap.org/img/wn/${icon}@2x.png`} />}
-          {temp && <p>Temperature: {temp} ºC</p>}
-          {time && <p>Time: {time}</p>}
+          <div className="box" id="box1">
+            <div>
+              {temp && <p>{temp} ºC</p>}
+            </div>
+            <div>
+              {icon && <img width={100} height={100} alt="weather_icon" src={`https://openweathermap.org/img/wn/${icon}@2x.png`} />}
+            </div>
+            <div>
+              {time && <p>{time}</p>}
+            </div>
+          </div>
+          <div className="box" id="box2">
+
+          </div>
+          <div className="box" id="box3">
+
+          </div>
           <button onClick={() => this.getForecast()}>Forecast</button>
           {error && <p>{error}</p>}
         </div>
