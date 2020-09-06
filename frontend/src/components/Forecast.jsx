@@ -152,9 +152,6 @@ export class Forecast extends React.Component {
           <div className="time3">
             {time3 && <p>{time3}</p>}
           </div>
-          <div className="error">
-            {error && <p>{error}</p>}
-          </div>
         </div>
       </div>
     );
