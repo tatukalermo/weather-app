@@ -91,9 +91,9 @@ export class Weather extends React.Component {
           error: 'Geolocation is not supported by this browser.',
         });
     }
-    console.log(this.state.longitude);
-    console.log(this.state.latitude);
   }
+
+  //Get the current date and time. Format it for cleaner output.
 
   getTime() {
     const months = [
@@ -134,9 +134,6 @@ export class Weather extends React.Component {
   // Collects the weather data from API and puts it to an Array. Then sets the state to match the data.
 
   async getWeather() {
-    console.log("Weather running");
-    console.log(this.state.longitude);
-    console.log(this.state.latitude);
     const [weatherData] = await Promise.all([getWeatherFromApi(this.state.latitude, this.state.longitude)]);
     if (weatherData) {
       console.log('Weather data:', weatherData)
@@ -153,7 +150,6 @@ export class Weather extends React.Component {
     } else {
       this.setState({ error: 'Unable to fetch weather' });
     }
-    console.log("Weather ending");
   }
 
   render() {
