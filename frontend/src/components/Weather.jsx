@@ -30,8 +30,8 @@ export class Weather extends React.Component {
       pressure: '',
       timeStamp: '',
       location: 'Helsinki',
-      latitude: 60.229506099999995,
-      longitude: 24.787014499999998,
+      latitude: 60.1733244,
+      longitude: 24.9410248,
       error: '',
     };
   }
@@ -109,7 +109,6 @@ export class Weather extends React.Component {
           pressure: weatherData.main.pressure,
           updatedAt: new Date().toTimeString(),
           location: weatherData.name,
-          error: '',
         });
     } else {
       this.setState({ error: 'Unable to fetch weather' });
