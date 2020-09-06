@@ -193,13 +193,13 @@ export class Weather extends React.Component {
                 <img className="icon bigIcon" src="https://image.flaticon.com/icons/svg/3144/3144126.svg" />
               </div>
               <div className="humidityInfo">
-                {humidity && <p>HUMIDITY<br />{humidity} %</p>}
+                {humidity && <p>HUMIDITY<br /><span className="value">{humidity} %</span></p>}
               </div>
               <div className="pressureIcon">
                 <img className="icon bigIcon" src="https://image.flaticon.com/icons/svg/556/556958.svg" />
               </div>
               <div className="pressureInfo">
-                {pressure && <p>AIR PRESSURE<br />{pressure} hPa</p>}
+                {pressure && <p>AIR PRESSURE<br /><span className="value">{pressure} hPa</span></p>}
               </div>
             </div>
             <div className="error">

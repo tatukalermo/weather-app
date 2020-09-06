@@ -11,8 +11,8 @@ body{
 
 .icon{
   filter: invert(1);
-  height: 2.381em;
-  width: 2.381em;
+  height: 2em;
+  width: 2em;
 }
 
 .icon.bigIcon{
@@ -37,7 +37,7 @@ body{
 }
 
 .topLocationText h1 {
-  margin-bottom: 12.175px;
+  margin-bottom: 0.5em;
 }
 
 
@@ -48,16 +48,16 @@ body{
 
 .weather {
   display: grid;
-  grid-template-columns: auto;
+  grid-template-columns: 2fr 3fr 3fr 2fr;
   grid-template-rows: auto;
   grid-template-areas:
-    "ref . . . . ."
-    ". . top top . ."
-    ". . top top . ."
-    ". . main main . ."
-    ". . main main . ."
-    ". . main main . ."
-    ". . main main . ."
+    "ref . . ."
+    ". top top ."
+    ". top top ."
+    ". main main ."
+    ". main main ."
+    ". main main ."
+    ". main main ."
 }
 
 .refresh {
@@ -73,8 +73,10 @@ body{
 .topRow {
   grid-area: top;
   margin-bottom: 2em;
+  padding-bottom: 2em;
+  border-bottom: 1px solid white;
   display: grid;
-  grid-template-columns: 4fr 1fr 5fr;
+  grid-template-columns: 8fr 1fr 10fr;
   grid-template-rows: auto;
   grid-template-areas:
     ". topIcon topLoc"
@@ -98,12 +100,15 @@ body{
 /*Current weather grid*/
 
 .currentWeather {
+  margin-bottom: 2em;
+  padding-bottom: 2em;
+  border-bottom: 1px solid white;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr 2fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;
   grid-template-areas:
-  ". curIcon curDiv curDiv"
-  "humIcon humInfo presIcon presInfo"
+  ". . curIcon curDiv curDiv . ."
+  ". humIcon humInfo . presIcon presInfo presInfo"
     
 }
 
@@ -113,7 +118,7 @@ body{
 }
 
 .currentDiv {
-  font-size: 1.6em;
+  font-size: 1.7em;
   font-weight: bold;
   grid-area: curDiv;
 }
@@ -133,16 +138,34 @@ body{
 
 .humidityInfo {
   grid-area: humInfo;
-  font-size: 1.4em;
+  font-size: 1.2em;
 }
 
 .pressureIcon {
   grid-area: presIcon;
   margin: auto;
+  margin-left: -1em;
 }
 
 .pressureInfo {
   grid-area: presInfo;
-  font-size: 1.4em;
+  font-size: 1.2em;
+  margin-left: -3em;
 }
 
+.value{
+  font-size: 1.4em;;
+  font-weight: bold;
+}
+
+/*Forecast grid*/
+
+.forecast{
+  display: grid;
+  grid-template-columns: 4fr 2fr 2fr 2fr 4fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    ". . . . ."
+    ". . . . ."
+    ". . . . ."
+}
