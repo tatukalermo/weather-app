@@ -4,9 +4,9 @@
   "description": "Weatherapp exercise frontend",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mrako/weatherapp.git"
+    "url": "https://github.com/TatuKalermo/weather-app.git"
   },
-  "author": "Marko Klemetti <marko.klemetti@gmail.com>",
+  "author": "Tatu Kalermo <tatukalermo@gmail.com>",
   "license": "UNLICENSED",
   "scripts": {
     "start": "node_modules/.bin/webpack-dev-server --config webpack.config.js --progress --inline --colors",
