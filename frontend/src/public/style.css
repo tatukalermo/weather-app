@@ -1,12 +1,12 @@
+/* STYLES */
+
 body{
   font-family: 'Lato', sans-serif;
   font-weight: 400;
   font-size: 1.3em;
   color: #555b5d;
-  /*text-shadow: .1em .1em 0 rgba(0,0,0,0.3);*/
   height: 100vh;
   background-color: #49d0f2;
-
 }
 
 .icon{
@@ -14,3 +14,135 @@ body{
   height: 2.381em;
   width: 2.381em;
 }
+
+.icon.bigIcon{
+  height: 3em;
+  width: 3em;
+}
+
+.topLocationText {
+  color : white;
+}
+
+.topIcon img {
+  filter: invert(34%) sepia(11%) saturate(244%) hue-rotate(149deg) brightness(96%) contrast(88%);
+}
+
+.refresh img:hover{
+  filter: invert(34%) sepia(11%) saturate(244%) hue-rotate(149deg) brightness(100%) contrast(58%);
+}
+
+.refresh img{
+  filter: invert(34%) sepia(11%) saturate(244%) hue-rotate(149deg) brightness(96%) contrast(88%);
+}
+
+.topLocationText h1 {
+  margin-bottom: 12.175px;
+}
+
+
+
+/* GRIDS */
+
+/*Main Grid*/
+
+.weather {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "ref . . . . ."
+    ". . top top . ."
+    ". . top top . ."
+    ". . main main . ."
+    ". . main main . ."
+    ". . main main . ."
+    ". . main main . ."
+}
+
+.refresh {
+  grid-area: ref;
+}
+
+.main {
+  grid-area: main;
+}
+
+/*Top row Grid*/
+
+.topRow {
+  grid-area: top;
+  margin-bottom: 2em;
+  display: grid;
+  grid-template-columns: 4fr 1fr 5fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    ". topIcon topLoc"
+    "topTxt topTxt topTxt"
+}
+
+.topIcon {
+  grid-area: topIcon;
+  margin: auto;
+}
+
+.topLocationText {
+  grid-area: topLoc;
+}
+
+.updatedTime {
+  grid-area: topTxt;
+  margin: auto;
+}
+
+/*Current weather grid*/
+
+.currentWeather {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 2fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+  ". curIcon curDiv curDiv"
+  "humIcon humInfo presIcon presInfo"
+    
+}
+
+.currentIcon {
+  grid-area: curIcon;
+  margin: auto;
+}
+
+.currentDiv {
+  font-size: 1.6em;
+  font-weight: bold;
+  grid-area: curDiv;
+}
+
+.currentDiv .currentTemp {
+  font-size: 2em;
+}
+
+.currentDiv p {
+  margin: 0.2em 0;
+}
+
+.humidityIcon {
+  grid-area: humIcon;
+  margin: auto;
+}
+
+.humidityInfo {
+  grid-area: humInfo;
+  font-size: 1.4em;
+}
+
+.pressureIcon {
+  grid-area: presIcon;
+  margin: auto;
+}
+
+.pressureInfo {
+  grid-area: presInfo;
+  font-size: 1.4em;
+}
+

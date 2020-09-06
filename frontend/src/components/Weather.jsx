@@ -95,6 +95,42 @@ export class Weather extends React.Component {
     console.log(this.state.latitude);
   }
 
+  getTime() {
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ]
+    const days = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thusday',
+      'Friday',
+      'Saturday'
+    ]
+    const d = new Date();
+    const year = d.getFullYear();
+    const date = d.getDate();
+    const month = months[d.getMonth()];
+    const day = days[d.getDay()];
+    const hours = d.getHours();
+    const minutes = ((d.getMinutes() < 10 ? '0' : '') + d.getMinutes());
+    const formatted = `${day} ${date} ${month} ${year}`;
+    const time = `${hours}:${minutes}`;
+    return (`${formatted} ${time}`.toUpperCase());
+  }
+
   // Collects the weather data from API and puts it to an Array. Then sets the state to match the data.
 
   async getWeather() {
@@ -111,7 +147,7 @@ export class Weather extends React.Component {
           humidity: weatherData.main.humidity,
           pressure: weatherData.main.pressure,
           weather: weatherData.weather[0].main.toUpperCase(),
-          updatedAt: new Date().toTimeString(),
+          updatedAt: this.getTime(),
           location: weatherData.name,
         });
     } else {
@@ -133,7 +169,7 @@ export class Weather extends React.Component {
             <div className="topIcon">
               <img className="icon" src="https://image.flaticon.com/icons/svg/1216/1216895.svg" />
             </div>
-            <div className="topLocation">
+            <div className="topLocationText">
               <h1>{location}</h1>
             </div>
             <div className="updatedTime">
@@ -145,27 +181,25 @@ export class Weather extends React.Component {
               <div className="currentIcon">
                 {icon && <img width={100} height={100} alt="weather_icon" src={`https://openweathermap.org/img/wn/${icon}@2x.png`} />}
               </div>
-              <div className="currentWeatherName">
-                {weather && <p>{weather}</p>}
+              <div className="currentDiv">
+                <div className="currentWeatherName">
+                  {weather && <p>{weather}</p>}
+                </div>
+                <div className="currentTemp">
+                  {temp && <p>{temp} ºC</p>}
+                </div>
               </div>
-              <div className="currentTemp">
-                {temp && <p>{temp} ºC</p>}
-              </div>
-            </div>
-            <div className="humidity">
               <div className="humidityIcon">
-                <img className="icon" src="https://image.flaticon.com/icons/svg/3144/3144126.svg" />
+                <img className="icon bigIcon" src="https://image.flaticon.com/icons/svg/3144/3144126.svg" />
               </div>
               <div className="humidityInfo">
-                {humidity && <p>Humidity: {humidity} %</p>}
+                {humidity && <p>HUMIDITY<br />{humidity} %</p>}
               </div>
-            </div>
-            <div className="airPressure">
               <div className="pressureIcon">
-                <img className="icon" src="https://image.flaticon.com/icons/svg/556/556958.svg" />
+                <img className="icon bigIcon" src="https://image.flaticon.com/icons/svg/556/556958.svg" />
               </div>
               <div className="pressureInfo">
-                {pressure && <p>Air pressure: {pressure} hPa</p>}
+                {pressure && <p>AIR PRESSURE<br />{pressure} hPa</p>}
               </div>
             </div>
             <div className="error">
