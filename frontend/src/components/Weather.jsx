@@ -203,9 +203,7 @@ export class Weather extends React.Component {
               </div>
             </div>
             <div className="error">
-              <div>
-                {error && <p>{error}</p>}
-              </div>
+              {error && <p>{error}</p>}
             </div>
           </div>
         </div>

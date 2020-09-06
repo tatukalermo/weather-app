@@ -5,7 +5,6 @@ body{
   font-weight: 400;
   font-size: 1.3em;
   color: #555b5d;
-  height: 100vh;
   background-color: #49d0f2;
 }
 
@@ -40,6 +39,11 @@ body{
   margin-bottom: 0.5em;
 }
 
+.error{
+  margin: auto;
+  text-align: center;
+}
+
 
 
 /* GRIDS */
@@ -72,8 +76,8 @@ body{
 
 .topRow {
   grid-area: top;
-  margin-bottom: 2em;
-  padding-bottom: 2em;
+  margin-bottom: 1.5em;
+  padding-bottom: 1.5em;
   border-bottom: 1px solid white;
   display: grid;
   grid-template-columns: 8fr 1fr 10fr;
@@ -100,8 +104,8 @@ body{
 /*Current weather grid*/
 
 .currentWeather {
-  margin-bottom: 2em;
-  padding-bottom: 2em;
+  margin-bottom: 1.5em;
+  padding-bottom: 1.5em;
   border-bottom: 1px solid white;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -161,11 +165,57 @@ body{
 /*Forecast grid*/
 
 .forecast{
+  font-size: 1.6em;
   display: grid;
   grid-template-columns: 4fr 2fr 2fr 2fr 4fr;
-  grid-template-rows: auto;
+  grid-template-rows: 2.5em 2.5em 2.5em;
   grid-template-areas:
-    ". . . . ."
-    ". . . . ."
-    ". . . . ."
+    ". temp1 temp2 temp3 ."
+    ". icon1 icon2 icon3 ."
+    ". time1 time2 time3 ."
+}
+
+.temp1{
+  grid-area: temp1;
+  margin: auto;
+}
+
+.temp2{
+  grid-area: temp2;
+  margin: auto;
+}
+
+.temp3{
+  grid-area: temp3;
+  margin: auto;
+}
+
+.foreIcon1{
+  grid-area: icon1;
+  margin: auto;
+}
+
+.foreIcon2{
+  grid-area: icon2;
+  margin: auto;
+}
+
+.foreIcon3{
+  grid-area: icon3;
+  margin: auto;
+}
+
+.time1{
+  grid-area: time1;
+  margin: auto;
+}
+
+.time2{
+  grid-area: time2;
+  margin: auto;
+}
+
+.time3{
+  grid-area: time3;
+  margin: auto;
 }

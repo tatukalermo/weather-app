@@ -106,14 +106,13 @@ export class Forecast extends React.Component {
         {
           icon: forecastData.weather.icon,
           temp: Math.round(forecastData.main.temp),
-          time: forecastData.time,
+          time: forecastData.time.slice(11, 16),
           icon2: forecastData.weather_2.icon,
           temp2: Math.round(forecastData.main_2.temp),
-          time2: forecastData.time_2,
+          time2: forecastData.time_2.slice(11, 16),
           icon3: forecastData.weather_3.icon,
           temp3: Math.round(forecastData.main_3.temp),
-          time3: forecastData.time_3,
-          error: '',
+          time3: forecastData.time_3.slice(11, 16),
         });
     } else {
       this.setState({ error: 'Unable to fetch forecast' });
@@ -126,41 +125,36 @@ export class Forecast extends React.Component {
     return (
       <div>
         <div className="forecast">
-          <div className="box" id="box1">
-            <div className="temp1">
-              {temp && <p>{temp} ºC</p>}
-            </div>
-            <div className="foreIcon1">
-              {icon && <img width={100} height={100} alt="weather_icon" src={`https://openweathermap.org/img/wn/${icon}@2x.png`} />}
-            </div>
-            <div className="time1">
-              {time && <p>{time}</p>}
-            </div>
+          <div className="temp1">
+            {temp && <p><span className="value">{temp} ºC</span></p>}
           </div>
-          <div className="box" id="box2">
-            <div className="temp2">
-              {temp2 && <p>{temp2} ºC</p>}
-            </div>
-            <div className="foreIcon2">
-              {icon2 && <img width={100} height={100} alt="weather_icon" src={`https://openweathermap.org/img/wn/${icon2}@2x.png`} />}
-            </div>
-            <div className="time2">
-              {time2 && <p>{time2}</p>}
-            </div>
+          <div className="foreIcon1">
+            {icon && <img width={100} height={100} alt="weather_icon" src={`https://openweathermap.org/img/wn/${icon}@2x.png`} />}
           </div>
-          <div className="box" id="box3">
-            <div className="temp3">
-              {temp3 && <p>{temp3} ºC</p>}
-            </div>
-            <div className="foreIcon3">
-              {icon3 && <img width={100} height={100} alt="weather_icon" src={`https://openweathermap.org/img/wn/${icon3}@2x.png`} />}
-            </div>
-            <div className="time3">
-              {time3 && <p>{time3}</p>}
-            </div>
+          <div className="time1">
+            {time && <p>{time}</p>}
           </div>
-          <button onClick={() => this.getForecast()}>Forecast</button>
-          {error && <p>{error}</p>}
+          <div className="temp2">
+            {temp2 && <p><span className="value">{temp2} ºC</span></p>}
+          </div>
+          <div className="foreIcon2">
+            {icon2 && <img width={100} height={100} alt="weather_icon" src={`https://openweathermap.org/img/wn/${icon2}@2x.png`} />}
+          </div>
+          <div className="time2">
+            {time2 && <p>{time2}</p>}
+          </div>
+          <div className="temp3">
+            {temp3 && <p><span className="value">{temp3} ºC</span></p>}
+          </div>
+          <div className="foreIcon3">
+            {icon3 && <img width={100} height={100} alt="weather_icon" src={`https://openweathermap.org/img/wn/${icon3}@2x.png`} />}
+          </div>
+          <div className="time3">
+            {time3 && <p>{time3}</p>}
+          </div>
+          <div className="error">
+            {error && <p>{error}</p>}
+          </div>
         </div>
       </div>
     );
