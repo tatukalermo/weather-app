@@ -129,6 +129,7 @@ button {
 .updatedTime {
   grid-area: topTxt;
   margin: auto;
+  text-transform: uppercase;
 }
 
 /*Current weather grid*/
@@ -172,6 +173,7 @@ button {
 .humidityInfo {
   grid-area: humInfo;
   font-size: 1.2em;
+  text-transform: uppercase;
 }
 
 .pressureIcon {
@@ -184,6 +186,7 @@ button {
   grid-area: presInfo;
   font-size: 1.2em;
   margin-left: -3em;
+  text-transform: uppercase;
 }
 
 .value {
