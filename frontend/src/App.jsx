@@ -4,8 +4,10 @@ import { Weather } from "./components/Weather";
 import { getForecastFromApi, getWeatherFromApi } from "./queries";
 import { Loader } from "./components/Loader";
 
+// Gets the current date and time. Formats it for cleaner output.
+
 export class App extends React.Component {
-  //Default latitude and longitude directing to Helsinki
+  // Default latitude and longitude directing to Helsinki
 
   constructor(props) {
     super(props);
@@ -22,22 +24,22 @@ export class App extends React.Component {
     this.fetchQueries = this.fetchQueries.bind(this);
   }
 
-  //Asking for permission to get the location from the user if browser supports Geolocation.
-  //When allowed saves latitude and longitude to the class for API call in getWeather().
+  // Asking for permission to get the location from the user if browser supports Geolocation.
+  // When allowed saves latitude and longitude to the class for API call in getWeather().
 
   async componentDidMount() {
     const success = (position) => {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-      console.log(latitude, longitude);
+      const newLatitude = position.coords.latitude;
+      const newLongitude = position.coords.longitude;
+      console.log(newLatitude, newLongitude);
       this.setState({
-        latitude: latitude,
-        longitude: longitude,
+        latitude: newLatitude,
+        longitude: newLongitude,
       });
       this.fetchQueries();
     };
 
-    const error = (error) => {
+    const error = () => {
       switch (error.code) {
         case error.PERMISSION_DENIED:
           this.setState((prevState) => {
@@ -76,8 +78,10 @@ export class App extends React.Component {
             return prevState;
           });
           break;
+        default:
       }
     };
+    /* global navigator */
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(success, error, {
         maximumAge: 0,
@@ -85,7 +89,8 @@ export class App extends React.Component {
         enableHighAccuracy: true,
       });
     } else {
-      this.setState((prevState) => {
+      const newLocal = this;
+      newLocal.setState((prevState) => {
         prevState = {
           error: "Geolocation is not supported by this browser.",
         };
@@ -95,27 +100,7 @@ export class App extends React.Component {
     }
   }
 
-  // Calls functions and sets the loading to false.
-
-  async fetchQueries() {
-    this.setState((prevState) => {
-      prevState.loading = true;
-      return prevState;
-    });
-
-    await this.getWeather();
-    await this.getForecast();
-
-    this.setState((prevState) => {
-      prevState.loading = false;
-
-      return prevState;
-    });
-  }
-
-  // Gets the current date and time. Formats it for cleaner output.
-
-  getTime() {
+  static getTime() {
     return new Date()
       .toLocaleTimeString("en-GB", {
         weekday: "long",
@@ -145,7 +130,7 @@ export class App extends React.Component {
           humidity: weatherData.main.humidity,
           pressure: weatherData.main.pressure,
           weather: weatherData.weather[0].main.toUpperCase(),
-          updatedAt: this.getTime(),
+          updatedAt: App.getTime(),
           location: weatherData.name,
         };
 
@@ -196,6 +181,24 @@ export class App extends React.Component {
         return prevState;
       });
     }
+  }
+
+  // Calls functions and sets the loading to false.
+
+  async fetchQueries() {
+    this.setState((prevState) => {
+      prevState.loading = true;
+      return prevState;
+    });
+
+    await this.getWeather();
+    await this.getForecast();
+
+    this.setState((prevState) => {
+      prevState.loading = false;
+
+      return prevState;
+    });
   }
 
   render() {

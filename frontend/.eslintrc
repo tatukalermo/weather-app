@@ -1,6 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": "airbnb",
+  "extends": ["airbnb", "prettier"],
   "env": {
     "es6": true,
     "node": true
@@ -8,7 +8,12 @@
   "rules": {
     "semi": ["error", "always"],
     "no-console": "off",
-    "comma-dangle": ["error", "always-multiline"]
+    "comma-dangle": ["error", "always-multiline"],
+    "linebreak-style": 0,
+    "react/prop-types": 0,
+    "import/prefer-default-export": "off",
+    "react/prefer-stateless-function": "off",
+    "no-param-reassign": 0
   },
   "globals": {
     "fetch": false,
