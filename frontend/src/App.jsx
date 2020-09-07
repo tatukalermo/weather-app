@@ -43,9 +43,7 @@ export class App extends React.Component {
       switch (error.code) {
         case error.PERMISSION_DENIED:
           this.setState((prevState) => {
-            prevState.weatherData = {
-              error: "User denied the request for Geolocation.",
-            };
+            prevState.error = "User denied the request for Geolocation.";
 
             return prevState;
           });
@@ -53,7 +51,7 @@ export class App extends React.Component {
           break;
         case error.POSITION_UNAVAILABLE:
           this.setState((prevState) => {
-            prevState.weatherData = {
+            prevState.error = {
               error: "Location information is unavailable.",
             };
 
@@ -62,7 +60,7 @@ export class App extends React.Component {
           break;
         case error.TIMEOUT:
           this.setState((prevState) => {
-            prevState.weatherData = {
+            prevState.error = {
               error: "The request to get user location timed out.",
             };
 
@@ -71,7 +69,7 @@ export class App extends React.Component {
           break;
         case error.UNKNOWN_ERROR:
           this.setState((prevState) => {
-            prevState = {
+            prevState.error = {
               error: "An unknown error occurred.",
             };
 
@@ -91,7 +89,7 @@ export class App extends React.Component {
     } else {
       const newLocal = this;
       newLocal.setState((prevState) => {
-        prevState = {
+        prevState.error = {
           error: "Geolocation is not supported by this browser.",
         };
 
@@ -138,7 +136,7 @@ export class App extends React.Component {
       });
     } else {
       this.setState((prevState) => {
-        prevState.weatherData = {
+        prevState.error = {
           error: "Unable to fetch weather",
         };
 
@@ -174,7 +172,7 @@ export class App extends React.Component {
       });
     } else {
       this.setState((prevState) => {
-        prevState.weatherData = {
+        prevState.error = {
           error: "Unable to fetch weather",
         };
 
@@ -209,7 +207,11 @@ export class App extends React.Component {
     return (
       <div>
         {this.state.weatherData && (
-          <Weather refresh={this.fetchQueries} data={this.state.weatherData} />
+          <Weather
+            refresh={this.fetchQueries}
+            data={this.state.weatherData}
+            error={this.state.error}
+          />
         )}
         {this.state.forecastData && <Forecast data={this.state.forecastData} />}
       </div>

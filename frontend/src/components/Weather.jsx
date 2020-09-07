@@ -1,6 +1,7 @@
 import React from "react";
 
 export const Weather = (props) => {
+  console.log(props);
   const {
     icon,
     temp,
@@ -9,8 +10,9 @@ export const Weather = (props) => {
     location,
     updatedAt,
     weather,
-    error,
   } = props.data;
+
+  const { error } = props;
 
   return (
     <div>
@@ -65,7 +67,7 @@ export const Weather = (props) => {
             <div className="humidityInfo">
               {humidity && (
                 <p>
-                  HUMIDITY
+                  Humidity
                   <br />
                   <span className="value">{humidity} %</span>
                 </p>
@@ -81,7 +83,7 @@ export const Weather = (props) => {
             <div className="pressureInfo">
               {pressure && (
                 <p>
-                  AIR PRESSURE
+                  Air Pressure
                   <br />
                   <span className="value">{pressure} hPa</span>
                 </p>
