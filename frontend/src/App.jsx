@@ -147,7 +147,6 @@ export class App extends React.Component {
           weather: weatherData.weather[0].main.toUpperCase(),
           updatedAt: this.getTime(),
           location: weatherData.name,
-          error: this.state.error,
         };
 
         return prevState;

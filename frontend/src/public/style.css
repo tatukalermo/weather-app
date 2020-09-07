@@ -47,6 +47,12 @@ body {
   text-align: center;
 }
 
+button {
+  border: 0;
+  background: transparent;
+  outline: none;
+}
+
 /* Loader styles */
 
 .loader {
