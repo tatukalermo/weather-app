@@ -1,213 +1,95 @@
-import React from 'react';
-
-// ENVIRONMENT VARIABLES
-
-const baseURL = process.env.ENDPOINT || 'http://localhost:9000/api';
-
-// FUNCTIONS
-
-const getWeatherFromApi = async (lat, lon) => {
-  try {
-    const response = await fetch(`${baseURL}/weatherbycoordinates?lat=${lat}&lon=${lon}`);
-    return response.json();
-  } catch (error) {
-    console.error(error);
-  }
-
-  return {};
-};
-
-// CLASSES
-
-//Default latitude and longitude directing to Helsinki
+import React from "react";
 
 export class Weather extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      loading: true,
-      icon: '',
-      temp: '',
-      humidity: '',
-      pressure: '',
-      timeStamp: '',
-      weather: '',
-      location: 'Helsinki',
-      latitude: 60.1733244,
-      longitude: 24.9410248,
-      error: '',
-    };
-  }
-
-  //Asking for permission to get the location from the user if browser supports Geolocation.
-  //When allowed saves latitude and longitude to the class for API call in getWeather().
-
-  async componentDidMount() {
-    const success = position => {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-      console.log(latitude, longitude);
-      this.setState({
-        latitude: latitude,
-        longitude: longitude
-      });
-      this.getWeather();
-    };
-
-    const error = error => {
-      switch (error.code) {
-        case error.PERMISSION_DENIED:
-          this.setState(
-            {
-              error: 'User denied the request for Geolocation.',
-            });
-          this.getWeather();
-          break;
-        case error.POSITION_UNAVAILABLE:
-          this.setState(
-            {
-              error: 'Location information is unavailable.',
-            });
-          break;
-        case error.TIMEOUT:
-          this.setState(
-            {
-              error: 'The request to get user location timed out.',
-            });
-          break;
-        case error.UNKNOWN_ERROR:
-          this.setState(
-            {
-              error: 'An unknown error occurred.',
-            });
-          break;
-      }
-    };
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(success, error, { maximumAge: 0, timeout: 5000, enableHighAccuracy: true });
-    } else {
-      this.setState(
-        {
-          error: 'Geolocation is not supported by this browser.',
-        });
-    }
-  }
-
-  //Get the current date and time. Format it for cleaner output.
-
-  getTime() {
-    const months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December'
-    ]
-    const days = [
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thusday',
-      'Friday',
-      'Saturday'
-    ]
-    const d = new Date();
-    const year = d.getFullYear();
-    const date = d.getDate();
-    const month = months[d.getMonth()];
-    const day = days[d.getDay()];
-    const hours = d.getHours();
-    const minutes = ((d.getMinutes() < 10 ? '0' : '') + d.getMinutes());
-    const formatted = `${day} ${date} ${month} ${year}`;
-    const time = `${hours}:${minutes}`;
-    return (`${formatted} ${time}`.toUpperCase());
-  }
-
-  // Collects the weather data from API and puts it to an Array. Then sets the state to match the data.
-
-  async getWeather() {
-    const [weatherData] = await Promise.all([getWeatherFromApi(this.state.latitude, this.state.longitude)]);
-    if (weatherData) {
-      console.log('Weather data:', weatherData)
-      const loader = document.querySelector(".loader-container");
-      loader.remove();
-      this.setState(
-        {
-          icon: weatherData.weather[0].icon,
-          temp: Math.round(weatherData.main.temp),
-          humidity: weatherData.main.humidity,
-          pressure: weatherData.main.pressure,
-          weather: weatherData.weather[0].main.toUpperCase(),
-          updatedAt: this.getTime(),
-          location: weatherData.name,
-          loading: false,
-        });
-    } else {
-      this.setState({ error: 'Unable to fetch weather' });
-    }
   }
 
   render() {
-    const { icon, temp, humidity, pressure, location, updatedAt, weather, error, loading } = this.state;
+    const {
+      icon,
+      temp,
+      humidity,
+      pressure,
+      location,
+      updatedAt,
+      weather,
+      error,
+    } = this.props.data;
 
-    if (loading) {
-      return null;
-    }
     return (
       <div>
         <div className="weather">
-          <div className="refresh">
-            <img className="icon" src="https://image.flaticon.com/icons/svg/1/1774.svg" onClick={() => this.getWeather()} />
+          <div className="refreshDiv">
+            <button className="refresh" onClick={this.props.refresh}>
+              <img
+                className="icon"
+                src="https://image.flaticon.com/icons/svg/1/1774.svg"
+              />
+            </button>
           </div>
           <div className="topRow">
             <div className="topIcon">
-              <img className="icon" src="https://image.flaticon.com/icons/svg/1216/1216895.svg" />
+              <img
+                className="icon"
+                src="https://image.flaticon.com/icons/svg/1216/1216895.svg"
+              />
             </div>
             <div className="topLocationText">
               <h1>{location}</h1>
             </div>
-            <div className="updatedTime">
-              {updatedAt && <p>{updatedAt}</p>}
-            </div>
+            <div className="updatedTime">{updatedAt && <p>{updatedAt}</p>}</div>
           </div>
           <div className="main">
             <div className="currentWeather">
               <div className="currentIcon">
-                {icon && <img width={100} height={100} alt="weather_icon" src={`https://openweathermap.org/img/wn/${icon}@2x.png`} />}
+                {icon && (
+                  <img
+                    width={100}
+                    height={100}
+                    alt="weather_icon"
+                    src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
+                  />
+                )}
               </div>
               <div className="currentDiv">
                 <div className="currentWeatherName">
                   {weather && <p>{weather}</p>}
                 </div>
-                <div className="currentTemp">
-                  {temp && <p>{temp} ºC</p>}
-                </div>
+                <div className="currentTemp">{temp && <p>{temp} ºC</p>}</div>
               </div>
               <div className="humidityIcon">
-                <img className="icon bigIcon" src="https://image.flaticon.com/icons/svg/3144/3144126.svg" />
+                <img
+                  className="icon bigIcon"
+                  src="https://image.flaticon.com/icons/svg/3144/3144126.svg"
+                />
               </div>
               <div className="humidityInfo">
-                {humidity && <p>HUMIDITY<br /><span className="value">{humidity} %</span></p>}
+                {humidity && (
+                  <p>
+                    HUMIDITY
+                    <br />
+                    <span className="value">{humidity} %</span>
+                  </p>
+                )}
               </div>
               <div className="pressureIcon">
-                <img className="icon bigIcon" src="https://image.flaticon.com/icons/svg/556/556958.svg" />
+                <img
+                  className="icon bigIcon"
+                  src="https://image.flaticon.com/icons/svg/556/556958.svg"
+                />
               </div>
               <div className="pressureInfo">
-                {pressure && <p>AIR PRESSURE<br /><span className="value">{pressure} hPa</span></p>}
+                {pressure && (
+                  <p>
+                    AIR PRESSURE
+                    <br />
+                    <span className="value">{pressure} hPa</span>
+                  </p>
+                )}
               </div>
             </div>
-            <div className="error">
-              {error && <p>{error}</p>}
-            </div>
+            <div className="error">{error && <p>{error}</p>}</div>
           </div>
         </div>
       </div>

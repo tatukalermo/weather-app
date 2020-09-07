@@ -1,12 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Forecast } from './components/Forecast';
-import { Weather } from './components/Weather';
+import React from "react";
+import ReactDOM from "react-dom";
+import { App } from "./App";
 
 ReactDOM.render(
   <div>
-    <Weather />
-    <Forecast />
+    <App />
   </div>,
-  document.getElementById('app')
+  document.getElementById("app")
 );

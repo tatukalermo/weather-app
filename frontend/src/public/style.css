@@ -1,45 +1,48 @@
 /* STYLES */
 
-body{
-  font-family: 'Lato', sans-serif;
+body {
+  font-family: "Lato", sans-serif;
   font-weight: 400;
   font-size: 1.3em;
   color: #555b5d;
   background-color: #49d0f2;
 }
 
-.icon{
+.icon {
   filter: invert(1);
   height: 2em;
   width: 2em;
 }
 
-.icon.bigIcon{
+.icon.bigIcon {
   height: 3em;
   width: 3em;
 }
 
 .topLocationText {
-  color : white;
+  color: white;
 }
 
 .topIcon img {
-  filter: invert(34%) sepia(11%) saturate(244%) hue-rotate(149deg) brightness(96%) contrast(88%);
+  filter: invert(34%) sepia(11%) saturate(244%) hue-rotate(149deg)
+    brightness(96%) contrast(88%);
 }
 
-.refresh img:hover{
-  filter: invert(34%) sepia(11%) saturate(244%) hue-rotate(149deg) brightness(100%) contrast(58%);
+.refreshDiv img:hover {
+  filter: invert(34%) sepia(11%) saturate(244%) hue-rotate(149deg)
+    brightness(100%) contrast(58%);
 }
 
-.refresh img{
-  filter: invert(34%) sepia(11%) saturate(244%) hue-rotate(149deg) brightness(96%) contrast(88%);
+.refreshDiv img {
+  filter: invert(34%) sepia(11%) saturate(244%) hue-rotate(149deg)
+    brightness(96%) contrast(88%);
 }
 
 .topLocationText h1 {
   margin-bottom: 0.5em;
 }
 
-.error{
+.error {
   margin: auto;
   text-align: center;
 }
@@ -59,11 +62,13 @@ body{
 }
 
 @keyframes spin {
-  0%  { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
-
-
 
 /* GRIDS */
 
@@ -80,10 +85,10 @@ body{
     ". main main ."
     ". main main ."
     ". main main ."
-    ". main main ."
+    ". main main .";
 }
 
-.refresh {
+.refreshDiv {
   grid-area: ref;
 }
 
@@ -103,7 +108,7 @@ body{
   grid-template-rows: auto;
   grid-template-areas:
     ". topIcon topLoc"
-    "topTxt topTxt topTxt"
+    "topTxt topTxt topTxt";
 }
 
 .topIcon {
@@ -130,9 +135,8 @@ body{
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;
   grid-template-areas:
-  ". . curIcon curDiv curDiv . ."
-  ". humIcon humInfo . presIcon presInfo presInfo"
-    
+    ". . curIcon curDiv curDiv . ."
+    ". humIcon humInfo . presIcon presInfo presInfo";
 }
 
 .currentIcon {
@@ -176,14 +180,14 @@ body{
   margin-left: -3em;
 }
 
-.value{
+.value {
   font-size: 1.3em;
   font-weight: bold;
 }
 
 /*Forecast grid*/
 
-.forecast{
+.forecast {
   font-size: 1.5em;
   display: grid;
   grid-template-columns: 4fr 2fr 2fr 2fr 4fr;
@@ -191,50 +195,50 @@ body{
   grid-template-areas:
     ". temp1 temp2 temp3 ."
     ". icon1 icon2 icon3 ."
-    ". time1 time2 time3 ."
+    ". time1 time2 time3 .";
 }
 
-.temp1{
+.temp1 {
   grid-area: temp1;
   margin: auto;
 }
 
-.temp2{
+.temp2 {
   grid-area: temp2;
   margin: auto;
 }
 
-.temp3{
+.temp3 {
   grid-area: temp3;
   margin: auto;
 }
 
-.foreIcon1{
+.foreIcon1 {
   grid-area: icon1;
   margin: auto;
 }
 
-.foreIcon2{
+.foreIcon2 {
   grid-area: icon2;
   margin: auto;
 }
 
-.foreIcon3{
+.foreIcon3 {
   grid-area: icon3;
   margin: auto;
 }
 
-.time1{
+.time1 {
   grid-area: time1;
   margin: auto;
 }
 
-.time2{
+.time2 {
   grid-area: time2;
   margin: auto;
 }
 
-.time3{
+.time3 {
   grid-area: time3;
   margin: auto;
 }
