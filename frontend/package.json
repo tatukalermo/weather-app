@@ -17,19 +17,22 @@
   "dependencies": {
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "react-native-geolocation-service": "^3.1.0"
+    "react-native-geolocation-service": "^3.1.0",
+    "regenerator-runtime": "^0.13.7",
+    "core-js": "^3.6.5"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.11.5",
-    "babel-core": "^6.24.0",
-    "babel-eslint": "^7.1.1",
-    "babel-loader": "^7.0.0",
-    "babel-preset-es2016": "^6.22.0",
-    "babel-preset-react": "^6.23.0",
+    "babel-eslint": "^9.0.0",
+    "babel-loader": "^8.0.0",
     "chai": "^4.2.0",
     "eslint": "^3.18.0",
     "eslint-config-airbnb": "^15.0.1",
     "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-chai-friendly": "^0.6.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.16.0",

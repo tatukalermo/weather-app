@@ -1,3 +1,3 @@
-import { expect } from "chai";
+import chai from "chai";
 
-global.expect = expect;
+global.expect = chai.expect;

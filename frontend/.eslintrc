@@ -1,9 +1,10 @@
 {
   "parser": "babel-eslint",
-  "extends": ["airbnb", "prettier"],
+  "extends": ["airbnb", "prettier", "plugin:chai-friendly/recommended"],
   "env": {
     "es6": true,
-    "node": true
+    "node": true,
+    "mocha": true
   },
   "rules": {
     "semi": ["error", "always"],
@@ -13,10 +14,13 @@
     "react/prop-types": 0,
     "import/prefer-default-export": "off",
     "react/prefer-stateless-function": "off",
-    "no-param-reassign": 0
+    "no-param-reassign": 0,
+    "no-unused-expressions": 0,
+    "chai-friendly/no-unused-expressions": 2
   },
   "globals": {
     "fetch": false,
     "document": true
-  }
+  },
+  "plugins": ["chai-friendly"]
 }
