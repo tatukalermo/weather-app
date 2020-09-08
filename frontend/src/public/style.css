@@ -43,7 +43,6 @@ body {
 }
 
 .error {
-  margin: auto;
   text-align: center;
 }
 
@@ -164,7 +163,6 @@ button {
 }
 
 .currentIcon {
-  grid-area: curIcon;
   display: flex;
   justify-content: flex-end;
   align-items: center;
