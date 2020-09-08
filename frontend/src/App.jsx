@@ -5,7 +5,6 @@ import { getForecastFromApi, getWeatherFromApi } from "./queries";
 import { Loader } from "./components/Loader";
 
 export class App extends React.Component {
-  
   // Default latitude and longitude directing to Helsinki
 
   constructor(props) {
@@ -182,7 +181,7 @@ export class App extends React.Component {
     }
   }
 
-  // Calls functions and sets the loading to false.
+  // Calls functions getWeather() and getForecast() then sets the loading to false.
 
   async fetchQueries() {
     this.setState((prevState) => {
