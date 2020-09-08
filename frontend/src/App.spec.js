@@ -1,10 +1,11 @@
+/* eslint-disable semi */
+/* eslint-disable react/jsx-filename-extension */
 /* eslint-disable no-undef */
-import { getTime } from "./App";
+import { Weather } from "./components/Weather";
 
-describe("Time", () => {
-  it("should return formatted time", () => {
-    const time = getTime();
-
-    expect(time).to.be.a("string");
+describe("Component: App", () => {
+  it("renders the Weather wrapper ", () => {
+    const wrapper = shallow(<Weather />);
+    expect(wrapper.find(Weather)).to.have.lengthOf(1);
   });
 });

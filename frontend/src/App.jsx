@@ -1,4 +1,6 @@
 import React from "react";
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 import { Forecast } from "./components/Forecast";
 import { Weather } from "./components/Weather";
 import { getForecastFromApi, getWeatherFromApi } from "./queries";
