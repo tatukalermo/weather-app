@@ -10,6 +10,7 @@ Utilises [OpenWeatherMap API](https://openweathermap.org/) for weather data. For
 - Have [Docker](https://docs.docker.com/engine/install/) and [docker-compose](https://docs.docker.com/compose/install/) installed on your machine
 - Go and get API key from [openweathermap.org](https://openweathermap.org/)
 - Open docker-compose.yml file and replace APPID variable value with your API key
+- `cd weather-app`
 - Run `docker-compose up -d`
 - Application is now running in [http://localhost:8000/](http://localhost:8000/)
 
