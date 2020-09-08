@@ -15,7 +15,7 @@ Utilises [OpenWeatherMap API](https://openweathermap.org/) for weather data. For
 
 #### Useful commands for Docker
 
-- `docker-compose up --force-recreate --build -d` for updating your image if you make changes
+- `docker-compose up --force-recreate --build -d` for recreating your image if you make changes
 - `docker image prune -f` gets rid of the old images
 
 ### Tests
