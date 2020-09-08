@@ -2,8 +2,27 @@
 /* eslint-disable semi */
 /* eslint-disable react/jsx-filename-extension */
 import React from "react";
+// import { Weather } from "./components/Weather";
+// import { Forecast } from "./components/Forecast";
+import { App } from "./App";
 import { Weather } from "./components/Weather";
 import { Forecast } from "./components/Forecast";
+import { getForecastFromApi, getWeatherFromApi } from "./queries";
+
+describe("App Component", () => {
+  it("calls componentDidMount", () => {
+    sinon.spy(App.prototype, "componentDidMount");
+
+    const wrapper = mount(<App />);
+    expect(App.prototype.componentDidMount.calledOnce).to.equal(true);
+  });
+
+  it("renders Weather", () => {
+    const wrapper = shallow(<App />);
+    wrapper.setState({ loading: false });
+    expect(wrapper.find(Weather)).to.have.length(1);
+  });
+});
 
 describe("Weather Component", () => {
   const data = {

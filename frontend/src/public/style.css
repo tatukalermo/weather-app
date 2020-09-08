@@ -109,27 +109,23 @@ button {
   margin-bottom: 1.5em;
   padding-bottom: 1.5em;
   border-bottom: 1px solid white;
-  display: grid;
-  grid-template-columns: 8fr 1fr 10fr;
-  grid-template-rows: auto;
-  grid-template-areas:
-    ". topIcon topLoc"
-    "topTxt topTxt topTxt";
 }
 
-.topIcon {
-  grid-area: topIcon;
-  margin: auto;
-}
-
-.topLocationText {
-  grid-area: topLoc;
+.topColumn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .updatedTime {
-  grid-area: topTxt;
-  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   text-transform: uppercase;
+}
+
+.updatedTime p {
+  margin: 0 0;
 }
 
 /*Current weather grid*/
@@ -139,22 +135,44 @@ button {
   padding-bottom: 1.5em;
   border-bottom: 1px solid white;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
   grid-template-areas:
-    ". . curIcon curDiv curDiv . ."
-    ". humIcon humInfo . presIcon presInfo presInfo";
+    "curDiv curDiv"
+    "humDiv presDiv";
+}
+
+.curDiv {
+  grid-area: curDiv;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.humDiv {
+  grid-area: humDiv;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.presDiv {
+  grid-area: presDiv;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .currentIcon {
   grid-area: curIcon;
-  margin: auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .currentDiv {
   font-size: 1.7em;
   font-weight: bold;
-  grid-area: curDiv;
 }
 
 .currentDiv .currentTemp {
@@ -162,31 +180,19 @@ button {
 }
 
 .currentDiv p {
-  margin: 0.2em 0;
-}
-
-.humidityIcon {
-  grid-area: humIcon;
-  margin: auto;
+  margin: 0 0;
 }
 
 .humidityInfo {
-  grid-area: humInfo;
   font-size: 1.2em;
   text-transform: uppercase;
-}
-
-.pressureIcon {
-  grid-area: presIcon;
-  margin: auto;
-  margin-left: -1em;
+  margin: 0 1em;
 }
 
 .pressureInfo {
-  grid-area: presInfo;
   font-size: 1.2em;
-  margin-left: -3em;
   text-transform: uppercase;
+  margin: 0 1em;
 }
 
 .value {
