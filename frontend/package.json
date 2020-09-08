@@ -12,8 +12,7 @@
     "start": "node_modules/.bin/webpack-dev-server --config webpack.config.js --progress --inline --colors",
     "lint": "node_modules/.bin/eslint --ext .js --ext .jsx .",
     "test:unit": "mocha --require @babel/register --require ./test/helpers.js --require ./test/dom.js --require ignore-styles 'src/**/*.test.js'",
-    "test:unit:watch": "npm run test:unit -- --watch",
-    "test": "npx mocha \"src/**/*.test.js\" --require @babel/register --require ./test/helpers.js --require ./test/dom.js --require ignore-styles"
+    "test:unit:watch": "npm run test:unit -- --watch"
   },
   "dependencies": {
     "core-js": "^3.6.5",

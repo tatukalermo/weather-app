@@ -4,9 +4,8 @@ import { Weather } from "./components/Weather";
 import { getForecastFromApi, getWeatherFromApi } from "./queries";
 import { Loader } from "./components/Loader";
 
-// Gets the current date and time. Formats it for cleaner output.
-
 export class App extends React.Component {
+  
   // Default latitude and longitude directing to Helsinki
 
   constructor(props) {
@@ -97,6 +96,8 @@ export class App extends React.Component {
       });
     }
   }
+
+  // Gets the current date and time. Formats it for cleaner output.
 
   static getTime() {
     return new Date()
