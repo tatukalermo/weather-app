@@ -20,7 +20,7 @@ Utilises [OpenWeatherMap API](https://openweathermap.org/) for weather data. For
 
 ### Tests
 
-- For unit tests run ``npm test`
+- For unit tests run `npm test`
 
 ### Support
 
