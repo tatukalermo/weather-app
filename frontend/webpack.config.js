@@ -20,6 +20,11 @@ module.exports = {
     filename: "index.jsx",
     publicPath: "/",
   },
+  externals: {
+    cheerio: "window",
+    "react/lib/ExecutionEnvironment": true,
+    "react/lib/ReactContext": true,
+  },
   module: {
     rules: [
       {
